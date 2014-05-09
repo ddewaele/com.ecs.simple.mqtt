@@ -18,42 +18,35 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 	<dependencies>
-	  <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.14</version>
-    </dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.0.9</version>
+		</dependency>
 
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.6.1</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>1.6.1</version>
-    </dependency>
-    
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>[4.0,5.0)</version>
 			<scope>test</scope>
 		</dependency>
-<dependency>
-  <groupId>org.fusesource.mqtt-client</groupId>
-  <artifactId>mqtt-client</artifactId>
-  <version>1.10</version>
-</dependency>
- <dependency>
-    <groupId>org.eclipse.paho</groupId>
-    <artifactId>mqtt-client</artifactId>
-    <version>0.4.0</version>
-  </dependency>
+		<dependency>
+			<groupId>org.fusesource.mqtt-client</groupId>
+			<artifactId>mqtt-client</artifactId>
+			<version>1.10</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.paho</groupId>
+			<artifactId>mqtt-client</artifactId>
+			<version>0.4.0</version>
+		</dependency>
 	</dependencies>
 
 
@@ -62,11 +55,11 @@
 			<id>sonatype</id>
 			<url>http://oss.sonatype.org/content/groups/public/</url>
 		</repository>
-  <repository>
-    <id>paho-mqtt-client</id>
-    <name>Paho MQTT Client</name>
-    <url>https://repo.eclipse.org/content/repositories/paho-releases/</url>
-  </repository>
-				
+		<repository>
+			<id>paho-mqtt-client</id>
+			<name>Paho MQTT Client</name>
+			<url>https://repo.eclipse.org/content/repositories/paho-releases/</url>
+		</repository>
+
 	</repositories>
 </project>
