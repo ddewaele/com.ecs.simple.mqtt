@@ -11,6 +11,8 @@ public class Connection {
 
 	public static final Connection CLOUD_MQTT_CONNECTION = new Connection(HOSTNAME,PORT,USERNAME,PASSWD);
 	
+	public static final Connection MOSQUITTO_TEST_CONNECTION = new Connection("test.mosquitto.org",1883,"user","pass");
+	
 	private final String host;
 	private final int port;
 	private final String username;
