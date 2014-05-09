@@ -13,7 +13,7 @@ public class FuseSourceSender extends Sender {
 	private MQTT mqtt = new MQTT();
 
 	public FuseSourceSender() {
-		super(Connection.CLOUD_MQTT_CONNECTION);
+		super(Connection.TELEMETRY_MQTT_CONNECTION);
 	}
 	
 	@Override

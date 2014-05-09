@@ -2,14 +2,8 @@ package com.ecs.simple.mqtt;
 
 public class Connection {
 
-	
-	private static final String HOSTNAME = "m10.cloudmqtt.com";
-	private static final int PORT = 19104;
-	
-	private static final String USERNAME = "";
-	private static final String PASSWD = "";
-
-	public static final Connection CLOUD_MQTT_CONNECTION = new Connection(HOSTNAME,PORT,USERNAME,PASSWD);
+	public static final Connection CLOUD_MQTT_CONNECTION = new Connection("m10.cloudmqtt.com",19104,"ddw","ddw");
+	public static final Connection TELEMETRY_MQTT_CONNECTION = new Connection("q.m2m.io",4483,"4230470327124ed3a71117fff17585d4","3i9h44tzsh","7223c48dfa131bab41c4f8789b5da2e5");
 	
 	private final String host;
 	private final int port;
