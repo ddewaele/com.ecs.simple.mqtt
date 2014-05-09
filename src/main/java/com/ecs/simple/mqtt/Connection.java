@@ -5,6 +5,8 @@ public class Connection {
 	public static final Connection CLOUD_MQTT_CONNECTION = new Connection("m10.cloudmqtt.com",19104,"ddw","ddw");
 	public static final Connection TELEMETRY_MQTT_CONNECTION = new Connection("q.m2m.io",4483,"4230470327124ed3a71117fff17585d4","3i9h44tzsh","7223c48dfa131bab41c4f8789b5da2e5");
 	
+	public static final Connection MOSQUITTO_TEST_CONNECTION = new Connection("test.mosquitto.org",1883,"user","pass");
+	
 	private final String host;
 	private final int port;
 	private final String username;

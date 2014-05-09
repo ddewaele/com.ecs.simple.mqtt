@@ -5,6 +5,8 @@ import org.fusesource.mqtt.client.MQTT;
 import org.fusesource.mqtt.client.Message;
 import org.fusesource.mqtt.client.QoS;
 import org.fusesource.mqtt.client.Topic;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ecs.simple.mqtt.Connection;
 import com.ecs.simple.mqtt.Constants;
@@ -12,10 +14,12 @@ import com.ecs.simple.mqtt.Receiver;
 
 public class FuseSourceReceiver extends Receiver {
 
+	private static final Logger LOG = LoggerFactory.getLogger(SystemOutTracer.class);
+	
 	private MQTT mqtt = new MQTT();
 	
 	public FuseSourceReceiver() {
-		super(Connection.CLOUD_MQTT_CONNECTION);
+		super(Connection.MOSQUITTO_TEST_CONNECTION);
 	}
 
 	@Override
@@ -39,12 +43,12 @@ public class FuseSourceReceiver extends Receiver {
 		
 		connection.subscribe(topics);
 
-		System.out.println("Receiving .....");
+		LOG.info("Receiving .....");
 		Message message = connection.receive();
-		System.out.println("Found message : " + message.getTopic());
+		LOG.info("Found message on topic : " + message.getTopic());
 		byte[] payload = message.getPayload();
 		
-		System.out.println("Found payload : " + new String(payload));
+		LOG.info("Found message payload : " + new String(payload));
 		// process the message then:
 		message.ack();		
 	}
