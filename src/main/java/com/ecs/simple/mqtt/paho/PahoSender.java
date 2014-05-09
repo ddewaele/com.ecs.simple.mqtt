@@ -31,7 +31,7 @@ public class PahoSender extends Sender {
 	@Override
 	public void sendMessage(String topicName, byte[] payload) throws Exception {
 	      MqttMessage message = new MqttMessage();
-	      message.setPayload("A single message".getBytes());
+	      message.setPayload(payload);
 	      client.publish(topicName, message);
 	      client.disconnect();
 	}
