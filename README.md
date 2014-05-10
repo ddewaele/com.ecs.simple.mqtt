@@ -106,14 +106,33 @@ After  Mosquitto has been installed you can start it like this:
 
     /usr/local/sbin/mosquitto -c /usr/local/etc/mosquitto/mosquitto.conf
     
-    
+    /root/HiveMQ/hivemq-1.5.0/bin/run.sh > /var/log/hivemq.log 2>&1
     
 brew install openssl
 
 
 - http://stackoverflow.com/questions/21508866/openssl-rvm-brew-conflicting-error
 
+## Tesing your broker
 
+There are several ways to test your broker
+	
+### Using mosquitto_pub / mosquitto_sub 
+	
+#### Testing the publisher
+	
+	export mqtt_host=localhost
+	export mqtt_port=1883
+	i=0 ; 
+	while [ $i -lt 5 ] ; do 
+	   mosquitto_pub -h $mqtt_host -t vdm/123/engineOff --qos 2 -m "123|456|789|000|$(date +"%m-%d-%Y-%H:%M:%S")" 
+	   sleep 60 ; 
+	   i=$(( $i + 1 )) ; 
+	done
+
+#### Testing the subscriber.
+
+	mosquitto_sub -h localhost -t vdm/+/engineOff
 
 # Thoughts...
 
@@ -133,6 +152,38 @@ A good practise on constrained networks is to ensure the payload is kept as smal
 ## Quality levels
 
 Talk about the different quality levels.
+
+
+	tcpdump -v -s 0 -A tcp port 1883
+
+###QoS Level 0 : At most once
+
+Here we simply publish a message once but don't care if we get a response.
+
+	MQTTFrame { type: CONNECT, qos: AT_MOST_ONCE, dup:false }
+	MQTTFrame { type: CONNACK, qos: AT_MOST_ONCE, dup:false }
+	MQTTFrame { type: PUBLISH, qos: AT_MOST_ONCE, dup:false }
+
+###QoS Level 1 : At least once
+
+Here we publish a message once but don't care if we get a respnose.
+
+
+MQTTFrame { type: CONNECT, qos: AT_MOST_ONCE, dup:false }
+MQTTFrame { type: CONNACK, qos: AT_MOST_ONCE, dup:false }
+MQTTFrame { type: PUBLISH, qos: AT_LEAST_ONCE, dup:false }
+MQTTFrame { type: PUBACK, qos: AT_MOST_ONCE, dup:false }
+
+
+###QoS Level 2 : Exactly once
+
+MQTTFrame { type: CONNECT, qos: AT_MOST_ONCE, dup:false }
+MQTTFrame { type: CONNACK, qos: AT_MOST_ONCE, dup:false }
+MQTTFrame { type: PUBLISH, qos: EXACTLY_ONCE, dup:false }
+MQTTFrame { type: PUBREC, qos: AT_MOST_ONCE, dup:false }
+MQTTFrame { type: PUBREL, qos: AT_LEAST_ONCE, dup:false }
+MQTTFrame { type: PUBCOMP, qos: AT_MOST_ONCE, dup:false }
+
 
 ## Errors encountered
 
@@ -204,3 +255,16 @@ broker.mqttdashboard.com
 
 
 - http://www.banym.de/linux/try-the-hivemq-mqtt-broker-on-centos-6-x
+
+## Design
+
+- http://www.infoq.com/articles/practical-mqtt-with-paho
+- https://groups.google.com/forum/#!topic/mqtt/cyy0fiHFV4w
+- http://www.ekito.fr/people/?p=4375
+- http://mobilebit.wordpress.com/2014/01/10/cesv2v/
+- http://dejanglozic.com/2014/05/06/rest-and-mqtt-yin-and-yang-of-micro-service-apis/?utm_content=buffer7b69a&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer
+- http://www.disk91.com/2013/technology/networks/mqtt-compared-to-html-for-its-network-saving/
+
+## Websockets
+
+- http://mqtt.org/wiki/doku.php/mqtt_over_websockets
