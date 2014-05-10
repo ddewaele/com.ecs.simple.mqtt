@@ -2,10 +2,12 @@ package com.ecs.simple.mqtt;
 
 public class Connection {
 
-	public static final Connection CLOUD_MQTT_CONNECTION = new Connection("m10.cloudmqtt.com",19104,"ddw","ddw");
-	public static final Connection TELEMETRY_MQTT_CONNECTION = new Connection("q.m2m.io",4483,"4230470327124ed3a71117fff17585d4","3i9h44tzsh","7223c48dfa131bab41c4f8789b5da2e5");
-	
-	public static final Connection MOSQUITTO_TEST_CONNECTION = new Connection("test.mosquitto.org",1883,"user","pass");
+	public static final Connection CLOUD_MQTT_CONNECTION = new Connection("m10.cloudmqtt.com",19104,"","");
+	public static final Connection TELEMETRY_MQTT_CONNECTION = new Connection("q.m2m.io",1883,"","","");
+	public static final Connection MOSQUITTO_TEST_CONNECTION = new Connection("test.mosquitto.org",1883,"","");
+	public static final Connection MOSQUITTO_LOCAL_CONNECTION = new Connection("localhost",1883,"","");
+	public static final Connection MQTT_DASHBOARD_CONNECTION = new Connection("broker.mqttdashboard.com",1883,"","");
+	public static final Connection MQTT_HETZNER_CONNECTION = new Connection("dev-api.fleetprobe.com",1883,"","");
 	
 	private final String host;
 	private final int port;
@@ -44,6 +46,9 @@ public class Connection {
 	public String getClientId() {
 		return clientId;
 	}
-	
+
+	public boolean hasUsernamePassword() {
+		return !(getUsername() == null || getUsername().trim().equals("") || getPassword() == null || getPassword().trim().equals("") );
+	}
 	
 }

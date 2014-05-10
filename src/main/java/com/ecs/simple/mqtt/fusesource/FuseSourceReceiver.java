@@ -14,12 +14,12 @@ import com.ecs.simple.mqtt.Receiver;
 
 public class FuseSourceReceiver extends Receiver {
 
-	private static final Logger LOG = LoggerFactory.getLogger(SystemOutTracer.class);
+	private static final Logger LOG = LoggerFactory.getLogger(FuseSourceReceiver.class);
 	
 	private MQTT mqtt = new MQTT();
 	
 	public FuseSourceReceiver() {
-		super(Connection.MOSQUITTO_TEST_CONNECTION);
+		super(Connection.MQTT_HETZNER_CONNECTION);
 	}
 
 	@Override
@@ -43,14 +43,17 @@ public class FuseSourceReceiver extends Receiver {
 		
 		connection.subscribe(topics);
 
-		LOG.info("Receiving .....");
-		Message message = connection.receive();
-		LOG.info("Found message on topic : " + message.getTopic());
-		byte[] payload = message.getPayload();
 		
-		LOG.info("Found message payload : " + new String(payload));
-		// process the message then:
-		message.ack();		
+		while(true) {
+			LOG.info("Receiving .....");
+			Message message = connection.receive();
+			LOG.info("Found message on topic : " + message.getTopic());
+			byte[] payload = message.getPayload();
+			
+			LOG.info("Found message payload : " + new String(payload));
+			// process the message then:
+			message.ack();
+		}
 	}
 	
 	public static void main(String[] args) throws Exception {
